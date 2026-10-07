@@ -37,28 +37,17 @@
   .top .ig{font-size:13px;letter-spacing:.14em;text-transform:uppercase}
 
   /* Hero */
-  .hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-rows:1fr auto;padding:90px var(--pad) 40px;overflow:hidden;cursor:crosshair}
+  .hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-rows:1fr auto;padding:90px var(--pad) 40px;overflow:hidden}
   .hero .word-wrap{display:grid;place-items:center;position:relative;z-index:2;pointer-events:none}
-  .hero .word{font-size:clamp(96px,22vw,340px);line-height:.9;letter-spacing:-.02em;transition:letter-spacing .5s ease;white-space:nowrap}
-  .f-serif{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400}
-  .f-syne{font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.06em!important}
-  .f-mono{font-family:"Space Mono",monospace;letter-spacing:-.08em!important}
-  .f-play{font-family:"Playfair Display",serif;font-style:italic;font-weight:500}
-  .f-sans{font-family:"DM Sans",sans-serif;font-weight:300;letter-spacing:-.06em!important}
+  .hero .word{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(96px,22vw,340px);line-height:.9;letter-spacing:-.02em;white-space:nowrap}
+  .f-serif{font-family:var(--serif);font-style:italic;font-weight:400}
   .hero .sub{position:absolute;left:0;right:0;top:calc(50% + clamp(70px,12vw,190px));text-align:center;font-size:13px;letter-spacing:.24em;text-transform:uppercase;opacity:.8;z-index:2;pointer-events:none}
   .hero-menu{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;border-top:1px solid currentColor;padding-top:18px}
   .hero-menu ul{list-style:none;display:flex;gap:clamp(18px,3.4vw,52px);flex-wrap:wrap}
-  .hero-menu a{font-family:var(--serif);font-size:clamp(24px,2.6vw,36px);line-height:1;display:inline-block;transition:transform .35s, opacity .35s}
+  .hero-menu a{font-family:var(--serif);font-style:italic;font-size:clamp(24px,2.6vw,36px);line-height:1;display:inline-block;transition:transform .35s, opacity .35s}
   .hero-menu ul:hover a{opacity:.45}
-  .hero-menu ul a:hover{opacity:1;transform:translateY(-4px);font-style:italic}
+  .hero-menu ul a:hover{opacity:1;transform:translateY(-4px)}
   .hero-menu small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
-  .trail{position:absolute;z-index:1;width:clamp(140px,16vw,240px);pointer-events:none;transform:translate(-50%,-50%) scale(.6) rotate(var(--rot));opacity:0;animation:trail 1.3s cubic-bezier(.2,.7,.2,1) forwards;border-radius:2px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
-  @keyframes trail{
-    0%{opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(var(--rot))}
-    15%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--rot))}
-    70%{opacity:1}
-    100%{opacity:0;transform:translate(-50%,-30%) scale(.92) rotate(var(--rot))}
-  }
 
   section{position:relative;padding:clamp(90px,13vw,180px) var(--pad)}
   .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;display:flex;gap:16px;align-items:center;margin-bottom:clamp(30px,4vw,56px)}
@@ -97,15 +86,13 @@
   /* Band */
   .band-list{list-style:none}
   .band-list li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:clamp(10px,1.4vw,18px) 0}
-  .band-list .nm{font-size:clamp(48px,9vw,140px);line-height:1;transition:color .3s}
+  .band-list .nm{font-family:var(--serif);font-style:italic;font-size:clamp(48px,9vw,140px);line-height:1;transition:color .3s}
   .band-list li:hover .nm{color:#f6c3a8}
   .band-list .rl{font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;text-align:right}
   .band-list li.five .nm{opacity:.5}
 
   /* Gallery with perspective distortion */
-  .gallery{perspective:1200px}
   .gal{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,2vw,30px);align-items:start}
-  .gal figure{will-change:transform;transform-origin:50% 50%}
   .gal img{width:100%;object-fit:cover}
   .gal figcaption{font-family:var(--serif);font-style:italic;font-size:18px;margin-top:8px}
   .ga{grid-column:1/8}.ga img{aspect-ratio:3/2}
@@ -175,10 +162,6 @@
   .vid-head span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
   .yt{border-radius:2px;box-shadow:0 30px 60px rgba(60,20,10,.25)}
   .legal{display:flex;gap:20px}
-  .daytime{position:fixed;left:var(--pad);bottom:20px;z-index:30;font-size:11px;letter-spacing:.24em;text-transform:uppercase;mix-blend-mode:difference;color:#fff;pointer-events:none;display:flex;align-items:center;gap:10px}
-  .daytime i{display:block;width:8px;height:8px;border-radius:50%;background:#fff}
-  .daytime span{transition:opacity .5s}
-  @media (max-width:900px){.daytime{display:none}}
   .socials{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,48px);margin-top:clamp(28px,4vw,48px)}
   .socials a{font-family:var(--serif);font-size:clamp(26px,3vw,42px);line-height:1;border-bottom:1px solid currentColor;padding-bottom:4px;transition:color .3s,font-style .3s}
   .socials a:hover{color:var(--coral);font-style:italic}
@@ -194,29 +177,28 @@
   <a class="ig" href="https://www.instagram.com/felden.music" target="_blank" rel="noopener">Instagram</a>
 </div>
 
-<header class="hero" id="top" data-bg="#f4ede4" data-fg="#1d1a17" data-time="Morgen">
-  <div class="word-wrap"><div class="word f-serif" id="word">felden</div></div>
+<header class="hero" id="top" data-bg="#f4ede4" data-fg="#1d1a17">
+  <div class="word-wrap"><div class="word">felden</div></div>
   <div class="sub">Akustische Musik · Leinfelden bei Stuttgart</div>
   <nav class="hero-menu">
     <ul id="menu">
-      <li><a href="#geschichte" data-font="f-play">Geschichte</a></li>
-      <li><a href="#musik" data-font="f-syne">Musik</a></li>
-      <li><a href="#video" data-font="f-syne">Video</a></li>
-      <li><a href="#band" data-font="f-mono">Band</a></li>
-      <li><a href="#bilder" data-font="f-sans">Bilder</a></li>
-      <li><a href="#kontakt" data-font="f-serif">Kontakt</a></li>
+      <li><a href="#geschichte">Geschichte</a></li>
+      <li><a href="#musik">Musik</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#band">Band</a></li>
+      <li><a href="#bilder">Bilder</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
     </ul>
-    <small>Maus bewegen ✦</small>
   </nav>
 </header>
 
-<section class="intro" data-bg="#f1e3cf" data-fg="#1d1a17" data-time="Vormittag">
+<section class="intro" data-bg="#f1e3cf" data-fg="#1d1a17">
   <div class="eyebrow r"><b>01</b> Über uns</div>
   <p class="r">Ein musikalisches <em>Feld</em>, in dem immer wieder <em>Neues</em> entstehen kann.</p>
   <div class="aside r"><span>Vier Musiker, deren wichtigste Grundlage das Loslassen, das Aufeinander-Hören und das gegenseitige Vertrauen ist.</span></div>
 </section>
 
-<section id="geschichte" data-bg="#eed6b8" data-fg="#1d1a17" data-time="Mittag">
+<section id="geschichte" data-bg="#eed6b8" data-fg="#1d1a17">
   <div class="eyebrow r"><b>02</b> Geschichte</div>
   <div class="story-grid">
     <h2 class="r">Aus der <em>Stille</em><br>entstanden.</h2>
@@ -240,7 +222,7 @@
   </div>
 </section>
 
-<section class="songs" id="musik" data-bg="#eaae90" data-fg="#1d1a17" data-time="Nachmittag">
+<section class="songs" id="musik" data-bg="#eaae90" data-fg="#1d1a17">
   <div class="eyebrow r"><b>03</b> Musik</div>
   <ol>
     <li class="r"><span class="n">01</span><h3><a href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">get along</a></h3><span class="g">Unser meistgehörter Song</span></li>
@@ -250,7 +232,7 @@
   <a class="all r" href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">Alle Songs auf Spotify</a>
 </section>
 
-<section class="vid" id="video" data-bg="#df6c4f" data-fg="#1d1a17" data-time="Abendrot">
+<section class="vid" id="video" data-bg="#df6c4f" data-fg="#1d1a17">
   <div class="eyebrow r"><b>04</b> Video</div>
   <div class="vid-head r"><h2>fine <em>beginning</em></h2><span>Radio Edit · Official Video</span></div>
   <div class="r">
@@ -265,28 +247,28 @@
   </div>
 </section>
 
-<section id="band" data-bg="#2779a7" data-fg="#f4ede4" data-time="Blaue Stunde">
+<section id="band" data-bg="#2779a7" data-fg="#f4ede4">
   <div class="eyebrow r"><b>05</b> Band</div>
   <ul class="band-list" id="bandlist">
-    <li class="r"><span class="nm f-serif">Heiner</span><span class="rl">Gesang</span></li>
-    <li class="r"><span class="nm f-serif">Hermann</span><span class="rl">Gitarre</span></li>
-    <li class="r"><span class="nm f-serif">Christian</span><span class="rl">Cajón · Didgeridoo</span></li>
-    <li class="r"><span class="nm f-serif">Uli</span><span class="rl">Keyboard</span></li>
-    <li class="r five"><span class="nm f-serif">„Magic“ Yannik</span><span class="rl">Ton · der fünfte Mann</span></li>
+    <li class="r"><span class="nm">Heiner</span><span class="rl">Gesang</span></li>
+    <li class="r"><span class="nm">Hermann</span><span class="rl">Gitarre</span></li>
+    <li class="r"><span class="nm">Christian</span><span class="rl">Cajón · Didgeridoo</span></li>
+    <li class="r"><span class="nm">Uli</span><span class="rl">Keyboard</span></li>
+    <li class="r five"><span class="nm">„Magic“ Yannik</span><span class="rl">Ton · der fünfte Mann</span></li>
   </ul>
 </section>
 
-<section class="gallery" id="bilder" data-bg="#165c7a" data-fg="#f4ede4" data-time="Dämmerung">
+<section class="gallery" id="bilder" data-bg="#165c7a" data-fg="#f4ede4">
   <div class="eyebrow r"><b>06</b> Bilder</div>
   <div class="gal">
-    <figure class="ga skew"><img src="images/feld-abend.jpg" alt="Die Band im Weizenfeld bei Sonnenuntergang" loading="lazy"><figcaption>Abendfeld</figcaption></figure>
-    <figure class="gb skew"><img src="images/wiese-oben.jpg" alt="Die vier Musiker liegen sternförmig im Gras" loading="lazy"><figcaption>Vier Richtungen</figcaption></figure>
-    <figure class="gc skew"><img src="images/treppe.jpg" alt="Die Band barfuß auf einer Steintreppe" loading="lazy"><figcaption>Barfuß</figcaption></figure>
-    <figure class="gd skew"><img src="images/wiese-live.jpg" alt="felden spielen akustisch auf einer Blumenwiese" loading="lazy"><figcaption>Live auf der Wiese</figcaption></figure>
+    <figure class="ga"><img src="images/feld-abend.jpg" alt="Die Band im Weizenfeld bei Sonnenuntergang" loading="lazy"><figcaption>Abendfeld</figcaption></figure>
+    <figure class="gb"><img src="images/wiese-oben.jpg" alt="Die vier Musiker liegen sternförmig im Gras" loading="lazy"><figcaption>Vier Richtungen</figcaption></figure>
+    <figure class="gc"><img src="images/treppe.jpg" alt="Die Band barfuß auf einer Steintreppe" loading="lazy"><figcaption>Barfuß</figcaption></figure>
+    <figure class="gd"><img src="images/wiese-live.jpg" alt="felden spielen akustisch auf einer Blumenwiese" loading="lazy"><figcaption>Live auf der Wiese</figcaption></figure>
   </div>
 </section>
 
-<section data-bg="#004a62" data-fg="#f4ede4" data-time="Nacht">
+<section data-bg="#004a62" data-fg="#f4ede4">
   <div class="eyebrow r"><b>07</b> Haltung</div>
   <div class="values">
     <div class="r"><h3><em>Loslassen</em></h3><p>Ungezwungen spielen und dem Moment Raum geben.</p></div>
@@ -295,7 +277,7 @@
   </div>
 </section>
 
-<section class="contact" id="kontakt" data-bg="#06303f" data-fg="#f4ede4" data-time="Mitternacht">
+<section class="contact" id="kontakt" data-bg="#06303f" data-fg="#f4ede4">
   <div>
     <div class="eyebrow r"><b>08</b> Kontakt</div>
     <a class="big r" href="https://www.instagram.com/felden.music" target="_blank" rel="noopener">Hören<br>wir <em>uns</em> <span>→</span></a>
@@ -312,13 +294,11 @@
   </div>
 </section>
 
-<div class="daytime" aria-hidden="true"><i></i><span id="daytime">Morgen</span></div>
 
 
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const fine = matchMedia('(pointer: fine)').matches;
   document.getElementById('y').textContent = new Date().getFullYear();
   const root = document.documentElement;
 
@@ -330,8 +310,7 @@
   secs.forEach(s => s.style.color = s.dataset.fg);
   const ease = t => t * t * (3 - 2 * t);
   const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
-  const dt = document.getElementById('daytime');
-  let ticking = false, lastLabel = '';
+  let ticking = false;
   function paint(){
     ticking = false;
     const mid = innerHeight / 2, zone = innerHeight * .45;
@@ -344,11 +323,6 @@
     const css = `rgb(${c})`;
     document.body.style.backgroundColor = css;
     meta.setAttribute('content', css);
-    const label = secs[i].dataset.time;
-    if (label !== lastLabel) {
-      lastLabel = label; dt.style.opacity = 0;
-      setTimeout(() => { dt.textContent = label; dt.style.opacity = 1; }, 250);
-    }
   }
   const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
   addEventListener('scroll', req, {passive:true}); addEventListener('resize', req); paint();
@@ -358,56 +332,6 @@
     if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
   }), {threshold:.1});
   document.querySelectorAll('.r').forEach(el => ro.observe(el));
-
-  /* Hero: typography changes with menu */
-  const word = document.getElementById('word');
-  const fonts = ['f-serif','f-play','f-syne','f-mono','f-sans'];
-  let cur = 'f-serif', idle = 0;
-  const setFont = f => { word.classList.remove(cur); word.classList.add(f); cur = f; };
-  document.querySelectorAll('#menu a').forEach(a => {
-    a.addEventListener('mouseenter', () => { setFont(a.dataset.font); idle = Date.now(); });
-  });
-  if (!reduce) setInterval(() => {
-    if (Date.now() - idle < 4000) return;
-    setFont(fonts[(fonts.indexOf(cur) + 1) % fonts.length]);
-  }, 1800);
-
-  /* Hero: image trail cursor */
-  const hero = document.querySelector('.hero');
-  const srcs = ['feld-abend','treppe','wiese-oben','feld-weite','wiese-live'].map(n => `images/${n}.jpg`);
-  srcs.forEach(s => { const i = new Image(); i.src = s; });
-  let lx = 0, ly = 0, k = 0;
-  if (fine && !reduce) hero.addEventListener('mousemove', e => {
-    const r = hero.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    if (Math.hypot(x - lx, y - ly) < 110) return;
-    lx = x; ly = y;
-    const img = document.createElement('img');
-    img.src = srcs[k++ % srcs.length]; img.className = 'trail'; img.alt = '';
-    img.style.left = x + 'px'; img.style.top = y + 'px';
-    img.style.setProperty('--rot', (Math.random() * 10 - 5).toFixed(1) + 'deg');
-    hero.appendChild(img);
-    img.addEventListener('animationend', () => img.remove());
-  });
-
-
-  /* Band: each name changes typeface on hover */
-  document.querySelectorAll('#bandlist .nm').forEach((n, i) => {
-    const f = fonts[(i + 1) % fonts.length];
-    n.parentElement.addEventListener('mouseenter', () => { n.classList.remove('f-serif'); n.classList.add(f); });
-    n.parentElement.addEventListener('mouseleave', () => { n.classList.remove(f); n.classList.add('f-serif'); });
-  });
-
-  /* Gallery: perspective distortion from scroll speed */
-  const sk = document.querySelectorAll('.skew');
-  let last = scrollY, v = 0;
-  if (!reduce) (function loop(){
-    const d = scrollY - last; last = scrollY;
-    v += (d - v) * .12;
-    const a = Math.max(-10, Math.min(10, v * .35));
-    sk.forEach(el => el.style.transform = `rotateX(${-a}deg) skewY(${a * .25}deg)`);
-    requestAnimationFrame(loop);
-  })();
 
   /* YouTube erst nach Klick laden (youtube-nocookie.com) */
   document.querySelectorAll('.yt').forEach(el => el.querySelector('.yt-btn').addEventListener('click', () => {
