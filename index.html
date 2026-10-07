@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4ede4">
+<title>felden</title>
+<meta name="description" content="felden – akustische Musik aus Leinfelden bei Stuttgart.">
+<meta property="og:title" content="felden">
+<meta property="og:description" content="Ein musikalisches Feld, in dem immer wieder Neues entstehen kann.">
+<meta property="og:image" content="images/feld-abend.jpg">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{
+    --teal:#004a62;
+    --blue:#2779a7;
+    --coral:#df6c4f;
+    --cream:#f4ede4;
+    --ink:#1d1a17;
+    --bg:#f4ede4;
+    --fg:#1d1a17;
+    --sans:"DM Sans", system-ui, sans-serif;
+    --serif:"Instrument Serif", Georgia, serif;
+    --pad:clamp(16px,4vw,60px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--fg);color:var(--bg)}
+
+  /* Top bar */
+  .top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);mix-blend-mode:difference;color:#fff;pointer-events:none}
+  .top a{pointer-events:auto}
+  .top .logo{font-family:var(--serif);font-size:26px;font-style:italic}
+  .top .ig{font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* Hero */
+  .hero{position:relative;height:100svh;min-height:600px;display:grid;grid-template-rows:1fr auto;padding:90px var(--pad) 40px;overflow:hidden;cursor:crosshair}
+  .hero .word-wrap{display:grid;place-items:center;position:relative;z-index:2;pointer-events:none}
+  .hero .word{font-size:clamp(96px,22vw,340px);line-height:.9;letter-spacing:-.02em;transition:letter-spacing .5s ease;white-space:nowrap}
+  .f-serif{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400}
+  .f-syne{font-family:"Syne",sans-serif;font-weight:800;letter-spacing:-.06em!important}
+  .f-mono{font-family:"Space Mono",monospace;letter-spacing:-.08em!important}
+  .f-play{font-family:"Playfair Display",serif;font-style:italic;font-weight:500}
+  .f-sans{font-family:"DM Sans",sans-serif;font-weight:300;letter-spacing:-.06em!important}
+  .hero .sub{position:absolute;left:0;right:0;top:calc(50% + clamp(70px,12vw,190px));text-align:center;font-size:13px;letter-spacing:.24em;text-transform:uppercase;opacity:.8;z-index:2;pointer-events:none}
+  .hero-menu{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;border-top:1px solid currentColor;padding-top:18px}
+  .hero-menu ul{list-style:none;display:flex;gap:clamp(18px,3.4vw,52px);flex-wrap:wrap}
+  .hero-menu a{font-family:var(--serif);font-size:clamp(24px,2.6vw,36px);line-height:1;display:inline-block;transition:transform .35s, opacity .35s}
+  .hero-menu ul:hover a{opacity:.45}
+  .hero-menu ul a:hover{opacity:1;transform:translateY(-4px);font-style:italic}
+  .hero-menu small{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.75}
+  .trail{position:absolute;z-index:1;width:clamp(140px,16vw,240px);pointer-events:none;transform:translate(-50%,-50%) scale(.6) rotate(var(--rot));opacity:0;animation:trail 1.3s cubic-bezier(.2,.7,.2,1) forwards;border-radius:2px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+  @keyframes trail{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(var(--rot))}
+    15%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--rot))}
+    70%{opacity:1}
+    100%{opacity:0;transform:translate(-50%,-30%) scale(.92) rotate(var(--rot))}
+  }
+
+  section{position:relative;padding:clamp(90px,13vw,180px) var(--pad)}
+  .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;display:flex;gap:16px;align-items:center;margin-bottom:clamp(30px,4vw,56px)}
+  .eyebrow b{font-weight:400;font-family:var(--serif);font-size:18px;letter-spacing:0;text-transform:none;font-style:italic}
+
+  /* Intro */
+  .intro p{font-family:var(--serif);font-size:clamp(38px,6.6vw,104px);line-height:1;letter-spacing:-.02em;max-width:16ch}
+  .intro p em{font-style:italic}
+  .intro .aside{display:flex;justify-content:flex-end;margin-top:clamp(40px,6vw,80px)}
+  .intro .aside span{max-width:34ch;font-size:16px}
+
+  /* Story – editorial */
+  .story-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,32px);align-items:start}
+  .story-grid h2{grid-column:1/-1;font-family:var(--serif);font-weight:400;font-size:clamp(56px,10vw,160px);line-height:.88;letter-spacing:-.03em;margin-bottom:clamp(40px,6vw,90px)}
+  .story-grid h2 em{font-style:italic}
+  .s-lead{grid-column:1/7;font-family:var(--serif);font-size:clamp(24px,2.3vw,34px);line-height:1.25}
+  .s-img{grid-column:8/13;grid-row:span 3}
+  .s-img img{width:100%;aspect-ratio:3/4;object-fit:cover}
+  .s-img figcaption{font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:10px;opacity:.7}
+  .s-text{grid-column:1/7;columns:2;column-gap:clamp(20px,2.4vw,36px);font-size:15.5px}
+  .s-text p{margin-bottom:1em;break-inside:avoid-column}
+  .timeline{grid-column:1/-1;margin-top:clamp(60px,8vw,110px);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid currentColor}
+  .timeline div{padding:22px 22px 0 0}
+  .timeline div + div{padding-left:22px;border-left:1px solid color-mix(in srgb,currentColor 30%,transparent)}
+  .timeline b{display:block;font-family:"Syne",sans-serif;font-weight:700;font-size:clamp(32px,3.6vw,56px);letter-spacing:-.05em;line-height:1;margin-bottom:14px}
+  .timeline p{font-size:15px}
+
+  /* Songs – hover list */
+  .songs ol{list-style:none;border-top:1px solid currentColor}
+  .songs li{border-bottom:1px solid currentColor;display:grid;grid-template-columns:60px 1fr auto;align-items:baseline;gap:20px;padding:clamp(18px,2.4vw,30px) 0;cursor:default}
+  .songs li .n{font-family:"Space Mono",monospace;font-size:13px;opacity:.7}
+  .songs li h3{font-family:var(--serif);font-weight:400;font-size:clamp(44px,8vw,128px);line-height:.95;letter-spacing:-.02em;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .songs li:hover h3{transform:translateX(clamp(10px,2vw,30px));font-style:italic}
+  .songs li .g{font-size:14px;max-width:24ch;text-align:right;opacity:.85}
+
+  /* Band */
+  .band-list{list-style:none}
+  .band-list li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:clamp(10px,1.4vw,18px) 0}
+  .band-list .nm{font-size:clamp(48px,9vw,140px);line-height:1;transition:color .3s}
+  .band-list li:hover .nm{color:#f6c3a8}
+  .band-list .rl{font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;text-align:right}
+  .band-list li.five .nm{opacity:.5}
+
+  /* Gallery with perspective distortion */
+  .gallery{perspective:1200px}
+  .gal{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,2vw,30px);align-items:start}
+  .gal figure{will-change:transform;transform-origin:50% 50%}
+  .gal img{width:100%;object-fit:cover}
+  .gal figcaption{font-family:var(--serif);font-style:italic;font-size:18px;margin-top:8px}
+  .ga{grid-column:1/8}.ga img{aspect-ratio:3/2}
+  .gb{grid-column:9/13;margin-top:18vh}.gb img{aspect-ratio:1/1}
+  .gc{grid-column:2/6;margin-top:-6vh}.gc img{aspect-ratio:3/4}
+  .gd{grid-column:7/13;margin-top:10vh}.gd img{aspect-ratio:16/9}
+
+  /* Values */
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,48px)}
+  .values div{border-top:1px solid currentColor;padding-top:20px}
+  .values h3{font-family:var(--serif);font-weight:400;font-size:clamp(34px,3.6vw,54px);line-height:1;margin-bottom:14px}
+  .values h3 em{font-style:italic}
+
+  /* Contact */
+  .contact{min-height:90svh;display:flex;flex-direction:column;justify-content:space-between}
+  .contact a.big{font-family:var(--serif);font-size:clamp(64px,14vw,240px);line-height:.88;letter-spacing:-.03em;display:inline-block}
+  .contact a.big em{font-style:italic}
+  .contact a.big span{display:inline-block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .contact a.big:hover span{transform:translateX(.12em)}
+  .contact a.big:hover{color:var(--coral)}
+  .contact a.big{transition:color .4s}
+  .contact .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid currentColor;padding-top:20px;margin-top:60px}
+
+  /* Reveal */
+  .r{opacity:0;transform:translateY(40px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+  .r.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    body{transition:none}
+    .r{opacity:1;transform:none;transition:none}
+  }
+
+  @media (max-width:900px){
+    .s-lead,.s-text,.s-img{grid-column:1/-1}
+    .s-img{grid-row:auto}
+    .s-text{columns:1}
+    .timeline{grid-template-columns:1fr 1fr}
+    .timeline div,.timeline div + div{padding:20px 14px 20px 0;border-left:0}
+    .timeline div:nth-child(even){padding-left:14px;border-left:1px solid color-mix(in srgb,currentColor 30%,transparent)}
+    .songs li{grid-template-columns:36px 1fr}
+    .songs li .g{grid-column:2;text-align:left}
+    .ga,.gb,.gc,.gd{grid-column:1/-1;margin-top:0}
+    .values{grid-template-columns:1fr}
+    .hero{cursor:auto}
+    .hero-menu small{display:none}
+  }
+  @media (max-width:560px){
+    .hero-menu ul{gap:14px 20px}
+    .band-list li{flex-direction:column;gap:2px}
+    .band-list .rl{text-align:left}
+  }
+
+  /* YouTube – Zwei-Klick-Lösung (DSGVO) */
+  .yt{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+  .yt img{width:100%;height:100%;object-fit:cover;opacity:.78;transition:transform 1.2s cubic-bezier(.2,.7,.2,1),opacity .6s}
+  .yt:hover img{transform:scale(1.03);opacity:.65}
+  .yt-btn{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.4));border:0;color:#fff;cursor:pointer;font:inherit}
+  .yt-circle{width:clamp(64px,7vw,92px);height:clamp(64px,7vw,92px);border-radius:50%;border:1px solid rgba(255,255,255,.9);display:grid;place-items:center;transition:background .35s,color .35s,transform .35s}
+  .yt-circle svg{width:34%;height:34%;margin-left:6%}
+  .yt-btn:hover .yt-circle,.yt-btn:focus-visible .yt-circle{background:#fff;color:#111;transform:scale(1.06)}
+  .yt-t{font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .yt-note{font-size:12.5px;line-height:1.6;opacity:.72;margin-top:14px;max-width:80ch}
+  .yt-note a{text-decoration:underline;text-underline-offset:2px}
+  .vid-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;margin-bottom:clamp(24px,3vw,40px)}
+  .vid-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(56px,10vw,160px);line-height:.88;letter-spacing:-.03em}
+  .vid-head h2 em{font-style:italic}
+  .vid-head span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
+  .yt{border-radius:2px;box-shadow:0 30px 60px rgba(60,20,10,.25)}
+  .legal{display:flex;gap:20px}
+  .daytime{position:fixed;left:var(--pad);bottom:20px;z-index:30;font-size:11px;letter-spacing:.24em;text-transform:uppercase;mix-blend-mode:difference;color:#fff;pointer-events:none;display:flex;align-items:center;gap:10px}
+  .daytime i{display:block;width:8px;height:8px;border-radius:50%;background:#fff}
+  .daytime span{transition:opacity .5s}
+  @media (max-width:900px){.daytime{display:none}}
+  .socials{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,48px);margin-top:clamp(28px,4vw,48px)}
+  .socials a{font-family:var(--serif);font-size:clamp(26px,3vw,42px);line-height:1;border-bottom:1px solid currentColor;padding-bottom:4px;transition:color .3s,font-style .3s}
+  .socials a:hover{color:var(--coral);font-style:italic}
+  .songs li h3 a{display:block}
+  .songs .all{display:inline-block;margin-top:clamp(28px,4vw,48px);font-family:var(--serif);font-size:clamp(24px,2.6vw,36px);border-bottom:1px solid currentColor;padding-bottom:4px}
+  .songs .all:hover{font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo" href="#top">felden</a>
+  <a class="ig" href="https://www.instagram.com/felden.music" target="_blank" rel="noopener">Instagram</a>
+</div>
+
+<header class="hero" id="top" data-bg="#f4ede4" data-fg="#1d1a17" data-time="Morgen">
+  <div class="word-wrap"><div class="word f-serif" id="word">felden</div></div>
+  <div class="sub">Akustische Musik · Leinfelden bei Stuttgart</div>
+  <nav class="hero-menu">
+    <ul id="menu">
+      <li><a href="#geschichte" data-font="f-play">Geschichte</a></li>
+      <li><a href="#musik" data-font="f-syne">Musik</a></li>
+      <li><a href="#video" data-font="f-syne">Video</a></li>
+      <li><a href="#band" data-font="f-mono">Band</a></li>
+      <li><a href="#bilder" data-font="f-sans">Bilder</a></li>
+      <li><a href="#kontakt" data-font="f-serif">Kontakt</a></li>
+    </ul>
+    <small>Maus bewegen ✦</small>
+  </nav>
+</header>
+
+<section class="intro" data-bg="#f1e3cf" data-fg="#1d1a17" data-time="Vormittag">
+  <div class="eyebrow r"><b>01</b> Über uns</div>
+  <p class="r">Ein musikalisches <em>Feld</em>, in dem immer wieder <em>Neues</em> entstehen kann.</p>
+  <div class="aside r"><span>Vier Musiker, deren wichtigste Grundlage das Loslassen, das Aufeinander-Hören und das gegenseitige Vertrauen ist.</span></div>
+</section>
+
+<section id="geschichte" data-bg="#eed6b8" data-fg="#1d1a17" data-time="Mittag">
+  <div class="eyebrow r"><b>02</b> Geschichte</div>
+  <div class="story-grid">
+    <h2 class="r">Aus der <em>Stille</em><br>entstanden.</h2>
+    <p class="s-lead r">2020 stand die Welt still, wir waren alle gezwungen, uns zurückzuziehen. Es war die Geburtsstunde von „Klein-Lukas“, einem Duo zweier alter Freunde, die sich bereits an der Uni kennengelernt hatten.</p>
+    <figure class="s-img r">
+      <img src="images/treppe.jpg" alt="Die Band barfuß lachend auf einer Steintreppe" loading="lazy">
+      <figcaption>Heiner, Hermann, Christian &amp; Uli</figcaption>
+    </figure>
+    <div class="s-text r">
+      <p>In ihrer vorherigen Band „Lukas“, die sich durch die äußeren Umstände auflösen musste, hatte Heiner Gitarre und Hermann Bass gespielt. In der Abgeschiedenheit eines alten Tübinger Ballettsaals entstanden zwischen den beiden neue Klänge. Heiner übernahm dabei den Gesang, Hermann die Gitarre.</p>
+      <p>Aus dieser vertrauten Nähe entstanden akustische Klänge, die auf die unterschiedlichen Genres verwiesen, aus denen die beiden kamen. Verantwortlich für die musikalische Vielfalt waren die Ungezwungenheit und das Vertrauen, das die beiden beim gemeinsamen Musizieren zuließen.</p>
+      <p>Durch den Einfluss von Christian und Uli veränderte sich die Musik später noch einmal, wurde breiter und bunter – und dennoch versuchten die vier, die Zärtlichkeit und das Ungezwungene dabei nicht zu verlieren.</p>
+      <p>Der Name felden geht zurück auf den Probeort in Leinfelden bei Stuttgart, steht aber auch für die natürlichen, unverstellten Klänge der vier Musiker.</p>
+    </div>
+    <div class="timeline r">
+      <div><b>2021</b><p>Christian kommt mit Cajón und Didgeridoo dazu. 2022 folgen die ersten Auftritte.</p></div>
+      <div><b>2023</b><p>Uli schließt sich mit seinem Keyboard an – er spielte schon vor 2020 bei „Lukas“.</p></div>
+      <div><b>2024</b><p>Aus Klein-Lukas wird felden, benannt nach dem neuen Probeort in Leinfelden.</p></div>
+      <div><b>2025</b><p>Mit Tontechniker „Magic“ Yannik entsteht das erste Album. Weitere Auftritte folgen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="songs" id="musik" data-bg="#eaae90" data-fg="#1d1a17" data-time="Nachmittag">
+  <div class="eyebrow r"><b>03</b> Musik</div>
+  <ol>
+    <li class="r"><span class="n">01</span><h3><a href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">get along</a></h3><span class="g">Unser meistgehörter Song</span></li>
+    <li class="r"><span class="n">02</span><h3><a href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">fine beginning</a></h3><span class="g">Radio Edit · auch als Video weiter unten</span></li>
+    <li class="r"><span class="n">03</span><h3><a href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">golden people</a></h3><span class="g">Ein verrauchter Soul-Club der 70er</span></li>
+  </ol>
+  <a class="all r" href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">Alle Songs auf Spotify</a>
+</section>
+
+<section class="vid" id="video" data-bg="#df6c4f" data-fg="#1d1a17" data-time="Abendrot">
+  <div class="eyebrow r"><b>04</b> Video</div>
+  <div class="vid-head r"><h2>fine <em>beginning</em></h2><span>Radio Edit · Official Video</span></div>
+  <div class="r">
+    <div class="yt" data-id="N66QxHXJvBc" data-title="felden – fine beginning (Radio Edit) [Official Video]">
+      <img src="images/wiese-live.jpg" alt="Vorschaubild: felden spielen auf einer Wiese" loading="lazy">
+      <button class="yt-btn" type="button" aria-label="Video von YouTube laden und abspielen">
+        <span class="yt-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+        <span class="yt-t">Video abspielen</span>
+      </button>
+    </div>
+    <p class="yt-note">Beim Abspielen wird das Video von YouTube (Google) geladen. Dabei werden Daten wie deine IP-Adresse an Google übertragen. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>. <a href="https://youtu.be/N66QxHXJvBc" target="_blank" rel="noopener">Direkt auf YouTube ansehen</a></p>
+  </div>
+</section>
+
+<section id="band" data-bg="#2779a7" data-fg="#f4ede4" data-time="Blaue Stunde">
+  <div class="eyebrow r"><b>05</b> Band</div>
+  <ul class="band-list" id="bandlist">
+    <li class="r"><span class="nm f-serif">Heiner</span><span class="rl">Gesang</span></li>
+    <li class="r"><span class="nm f-serif">Hermann</span><span class="rl">Gitarre</span></li>
+    <li class="r"><span class="nm f-serif">Christian</span><span class="rl">Cajón · Didgeridoo</span></li>
+    <li class="r"><span class="nm f-serif">Uli</span><span class="rl">Keyboard</span></li>
+    <li class="r five"><span class="nm f-serif">„Magic“ Yannik</span><span class="rl">Ton · der fünfte Mann</span></li>
+  </ul>
+</section>
+
+<section class="gallery" id="bilder" data-bg="#165c7a" data-fg="#f4ede4" data-time="Dämmerung">
+  <div class="eyebrow r"><b>06</b> Bilder</div>
+  <div class="gal">
+    <figure class="ga skew"><img src="images/feld-abend.jpg" alt="Die Band im Weizenfeld bei Sonnenuntergang" loading="lazy"><figcaption>Abendfeld</figcaption></figure>
+    <figure class="gb skew"><img src="images/wiese-oben.jpg" alt="Die vier Musiker liegen sternförmig im Gras" loading="lazy"><figcaption>Vier Richtungen</figcaption></figure>
+    <figure class="gc skew"><img src="images/treppe.jpg" alt="Die Band barfuß auf einer Steintreppe" loading="lazy"><figcaption>Barfuß</figcaption></figure>
+    <figure class="gd skew"><img src="images/wiese-live.jpg" alt="felden spielen akustisch auf einer Blumenwiese" loading="lazy"><figcaption>Live auf der Wiese</figcaption></figure>
+  </div>
+</section>
+
+<section data-bg="#004a62" data-fg="#f4ede4" data-time="Nacht">
+  <div class="eyebrow r"><b>07</b> Haltung</div>
+  <div class="values">
+    <div class="r"><h3><em>Loslassen</em></h3><p>Ungezwungen spielen und dem Moment Raum geben.</p></div>
+    <div class="r"><h3>Aufeinander <em>hören</em></h3><p>Leise genug sein, damit die anderen gehört werden.</p></div>
+    <div class="r"><h3><em>Vertrauen</em></h3><p>Die Grundlage, auf der immer wieder Neues entstehen kann.</p></div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt" data-bg="#06303f" data-fg="#f4ede4" data-time="Mitternacht">
+  <div>
+    <div class="eyebrow r"><b>08</b> Kontakt</div>
+    <a class="big r" href="https://www.instagram.com/felden.music" target="_blank" rel="noopener">Hören<br>wir <em>uns</em> <span>→</span></a>
+    <div class="socials r">
+      <a href="https://www.instagram.com/felden.music" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@feldengreatmusic" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://open.spotify.com/artist/2TYIWhqs4LQytH0IXlrEBR" target="_blank" rel="noopener">Spotify</a>
+    </div>
+  </div>
+  <div class="foot">
+    <span>© <span id="y">2026</span> felden</span>
+    <span class="legal"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
+    <a href="#top">Nach oben ↑</a>
+  </div>
+</section>
+
+<div class="daytime" aria-hidden="true"><i></i><span id="daytime">Morgen</span></div>
+
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const root = document.documentElement;
+
+  /* Background: ein Tag auf dem Feld – sanft interpoliert, Morgen bis Mitternacht */
+  const meta = document.querySelector('meta[name=theme-color]');
+  const secs = [...document.querySelectorAll('[data-bg]')];
+  const hex = s => [1,3,5].map(i => parseInt(s.slice(i, i + 2), 16));
+  const cols = secs.map(s => hex(s.dataset.bg));
+  secs.forEach(s => s.style.color = s.dataset.fg);
+  const ease = t => t * t * (3 - 2 * t);
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const dt = document.getElementById('daytime');
+  let ticking = false, lastLabel = '';
+  function paint(){
+    ticking = false;
+    const mid = innerHeight / 2, zone = innerHeight * .45;
+    let i = secs.findIndex(s => s.getBoundingClientRect().bottom > mid);
+    if (i < 0) i = secs.length - 1;
+    const r = secs[i].getBoundingClientRect();
+    let c = cols[i];
+    if (i > 0 && mid - r.top < zone) c = mix(cols[i - 1], cols[i], ease(.5 + (mid - r.top) / (2 * zone)));
+    else if (i < secs.length - 1 && r.bottom - mid < zone) c = mix(cols[i], cols[i + 1], ease(.5 - (r.bottom - mid) / (2 * zone)));
+    const css = `rgb(${c})`;
+    document.body.style.backgroundColor = css;
+    meta.setAttribute('content', css);
+    const label = secs[i].dataset.time;
+    if (label !== lastLabel) {
+      lastLabel = label; dt.style.opacity = 0;
+      setTimeout(() => { dt.textContent = label; dt.style.opacity = 1; }, 250);
+    }
+  }
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } };
+  addEventListener('scroll', req, {passive:true}); addEventListener('resize', req); paint();
+
+  /* Reveal */
+  const ro = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  }), {threshold:.1});
+  document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+  /* Hero: typography changes with menu */
+  const word = document.getElementById('word');
+  const fonts = ['f-serif','f-play','f-syne','f-mono','f-sans'];
+  let cur = 'f-serif', idle = 0;
+  const setFont = f => { word.classList.remove(cur); word.classList.add(f); cur = f; };
+  document.querySelectorAll('#menu a').forEach(a => {
+    a.addEventListener('mouseenter', () => { setFont(a.dataset.font); idle = Date.now(); });
+  });
+  if (!reduce) setInterval(() => {
+    if (Date.now() - idle < 4000) return;
+    setFont(fonts[(fonts.indexOf(cur) + 1) % fonts.length]);
+  }, 1800);
+
+  /* Hero: image trail cursor */
+  const hero = document.querySelector('.hero');
+  const srcs = ['feld-abend','treppe','wiese-oben','feld-weite','wiese-live'].map(n => `images/${n}.jpg`);
+  srcs.forEach(s => { const i = new Image(); i.src = s; });
+  let lx = 0, ly = 0, k = 0;
+  if (fine && !reduce) hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    if (Math.hypot(x - lx, y - ly) < 110) return;
+    lx = x; ly = y;
+    const img = document.createElement('img');
+    img.src = srcs[k++ % srcs.length]; img.className = 'trail'; img.alt = '';
+    img.style.left = x + 'px'; img.style.top = y + 'px';
+    img.style.setProperty('--rot', (Math.random() * 10 - 5).toFixed(1) + 'deg');
+    hero.appendChild(img);
+    img.addEventListener('animationend', () => img.remove());
+  });
+
+
+  /* Band: each name changes typeface on hover */
+  document.querySelectorAll('#bandlist .nm').forEach((n, i) => {
+    const f = fonts[(i + 1) % fonts.length];
+    n.parentElement.addEventListener('mouseenter', () => { n.classList.remove('f-serif'); n.classList.add(f); });
+    n.parentElement.addEventListener('mouseleave', () => { n.classList.remove(f); n.classList.add('f-serif'); });
+  });
+
+  /* Gallery: perspective distortion from scroll speed */
+  const sk = document.querySelectorAll('.skew');
+  let last = scrollY, v = 0;
+  if (!reduce) (function loop(){
+    const d = scrollY - last; last = scrollY;
+    v += (d - v) * .12;
+    const a = Math.max(-10, Math.min(10, v * .35));
+    sk.forEach(el => el.style.transform = `rotateX(${-a}deg) skewY(${a * .25}deg)`);
+    requestAnimationFrame(loop);
+  })();
+
+  /* YouTube erst nach Klick laden (youtube-nocookie.com) */
+  document.querySelectorAll('.yt').forEach(el => el.querySelector('.yt-btn').addEventListener('click', () => {
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + el.dataset.id + '?autoplay=1&rel=0&modestbranding=1';
+    f.title = el.dataset.title;
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    el.replaceChildren(f);
+  }));
+})();
+</script>
+</body>
+</html>
